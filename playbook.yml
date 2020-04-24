@@ -5,6 +5,48 @@
   - name: Deploy the service
     k8s:
       state: present
+      definition: "{{ lookup('template', 'metrics-server/aggregated-metrics-reader.yaml') | from_yaml }}"
+      validate_certs: no
+      namespace: default
+  - name: Deploy the service
+    k8s:
+      state: present
+      definition: "{{ lookup('template', 'metrics-server/auth-delegator.yaml') | from_yaml }}"
+      validate_certs: no
+      namespace: default
+  - name: Deploy the service
+    k8s:
+      state: present
+      definition: "{{ lookup('template', 'metrics-server/auth-reader.yaml') | from_yaml }}"
+      validate_certs: no
+      namespace: default
+  - name: Deploy the service
+    k8s:
+      state: present
+      definition: "{{ lookup('template', 'metrics-server/metrics-apiservice.yaml') | from_yaml }}"
+      validate_certs: no
+      namespace: default
+  - name: Deploy the service
+    k8s:
+      state: present
+      definition: "{{ lookup('template', 'metrics-server/metrics-server-deployment.yaml') | from_yaml }}"
+      validate_certs: no
+      namespace: default
+  - name: Deploy the service
+    k8s:
+      state: present
+      definition: "{{ lookup('template', 'metrics-server/metrics-server-service.yaml') | from_yaml }}"
+      validate_certs: no
+      namespace: default
+  - name: Deploy the service
+    k8s:
+      state: present
+      definition: "{{ lookup('template', 'metrics-server/resource-reader.yaml') | from_yaml }}"
+      validate_certs: no
+      namespace: default
+  - name: Deploy the service
+    k8s:
+      state: present
       definition: "{{ lookup('template', 'service.yml') | from_yaml }}"
       validate_certs: no
       namespace: default
@@ -14,3 +56,10 @@
       validate_certs: no
       namespace: default
       definition: "{{ lookup('template', 'deployment.yml') | from_yaml }}"
+  - name: Deploy the service
+    k8s:
+      state: present
+      definition: "{{ lookup('template', 'metrics-server/hpa.yml') | from_yaml }}"
+      validate_certs: no
+      namespace: default
+
