@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: node-web-app
-        image: naresh240/node-web-app:v2
+        image: naresh240/node-web-app:v1
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
