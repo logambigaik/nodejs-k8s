@@ -1,4 +1,20 @@
 ---
+kind: Service
+apiVersion: v1
+metadata:
+  name: node-web-app
+spec:
+  type: LoadBalancer
+  selector:
+    app: node-web-app
+  ports:
+    - name: http
+      protocol: TCP
+      # ELB's port
+      port: 3000
+      targetPort: 8080
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -20,7 +36,7 @@ spec:
     spec:
       containers:
       - name: node-web-app
-        image: "{{ image_id }}"
+        image: naresh240/node-web-app:v1
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -44,5 +60,4 @@ spec:
           requests:
             cpu: 200m
             memory: 64Mi
-        
 
